@@ -1,0 +1,71 @@
+.container {
+  background-color: var(--color-yellow);
+  width: 100%;
+  padding: 1rem 0;
+
+  &__logo-meli-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  &__input-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__logo-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 3.36rem;
+      height: 3.36rem;
+      background-color: var(--color-light-grey);
+      cursor: pointer;
+      border-radius: 0 0.4rem 0.4rem 0;
+    }
+
+    &__input {
+      height: 3rem;
+      border: none;
+      color: var(--color-carbon-3);
+      padding-left: 1rem;
+      padding-top: 0.18rem;
+      padding-bottom: 0.18rem;
+      flex-grow: 1;
+      border-radius: 0.4rem 0 0 0.4rem;
+      font-size: 1.8rem;
+      font-family: 'Roboto', sans-serif;
+
+      &::placeholder {
+        color: var(--color-carbon-9);
+      }
+
+      &:-ms-input-placeholder {
+        color: var(--color-carbon-9);
+      }
+
+      &::-ms-input-placeholder {
+        color: var(--color-carbon-9);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  @media (max-width: 577px) {
+    &__logo-meli-wrapper {
+      margin-top: 1.8rem;
+    }
+
+    &__input-search {
+      margin: 1.8rem 0;
+    }
+  }
+}

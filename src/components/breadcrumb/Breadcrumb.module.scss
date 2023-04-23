@@ -1,0 +1,12 @@
+.container {
+  width: calc(100% - (var(--spacing-16) * 2));
+  padding: var(--spacing-16);
+  font-size: 1.4rem;
+  color: var(--color-carbon-9);
+
+  &__items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
