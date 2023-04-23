@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import CurrencyFormat from 'react-currency-format';
 
 import styles from './ProductListItem.module.scss';
 import shippingLogo from '../../assets/images/ic_shipping@2x.png';
+import loaderCircle from '../../assets/images/loader_circle.gif';
 import { ProductListItemState } from '../../store/product-list/product-list.entity';
 
 interface ProductListItemProps {
@@ -16,6 +18,9 @@ interface ProductListItemProps {
  * @param data is the information of a product obtained in the query
  */
 const ProductListItem = ({ data, onClickItem }: ProductListItemProps): JSX.Element => {
+
+  const [imageIsReady, setImageIsReady] = useState<boolean>(false);
+
   return (
     <section
       data-testid={`product-list-item-${data.id}`}
@@ -33,7 +38,15 @@ const ProductListItem = ({ data, onClickItem }: ProductListItemProps): JSX.Eleme
         >
           <Col xs={6} sm={3}>
             <figure className={styles['container__row__permalink-img-wrapper']}>
-              <img src={data.picture} alt="thumbnail" />
+              <img
+                src={data.picture}
+                alt='thumbnail'
+                onLoad={() => setImageIsReady(true)}
+                style={{visibility: imageIsReady ? 'visible' : 'hidden'}}
+              />
+              {!imageIsReady && (
+                <img src={loaderCircle} alt='loader' />
+              )}
             </figure>
           </Col>
           <Col xs={6} sm={7}>
@@ -44,7 +57,7 @@ const ProductListItem = ({ data, onClickItem }: ProductListItemProps): JSX.Eleme
                 </span>
                 {data.freeShipping && (
                   <div className={styles['container__row__data-wrapper__price__shipping-logo']}>
-                    <img src={shippingLogo} alt="shipping" />
+                    <img src={shippingLogo} alt='shipping' />
                   </div>
                 )}
               </div>

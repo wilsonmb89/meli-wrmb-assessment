@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-grid-system';
 import CurrencyFormat from 'react-currency-format';
 
 import styles from './ProductDetail.module.scss';
+import loaderCircle from '../../assets/images/loader_circle.gif';
 import { AppDispatch } from '../../store';
 import { fetchProductSelected } from '../../store/product-selected/product-selected.effect';
 import { productSelectedStateSelector } from '../../store/product-selected/product-selected.select';
@@ -20,6 +21,8 @@ const ProductDetail = () => {
 
   const { itemId } = useParams();
   const { item: productSelected, fetchDone } = useSelector(productSelectedStateSelector);
+
+  const [imageIsReady, setImageIsReady] = useState<boolean>(false);
 
   useEffect(() => {
     if (itemId) {
@@ -53,7 +56,15 @@ const ProductDetail = () => {
               <Row nogutter>
                 <Col xs={12} md={8}>
                   <figure className={styles['container__row__permalink-wrapper']}>
-                    <img src={productSelected.picture} alt="permalink" />
+                    <img
+                      src={productSelected.picture}
+                      alt='permalink'
+                      onLoad={() => setImageIsReady(true)}
+                      style={{visibility: imageIsReady ? 'visible' : 'hidden'}}
+                    />
+                    {!imageIsReady && (
+                      <img src={loaderCircle} alt='loader' />
+                    )}
                   </figure>
                 </Col>
                 <Col xs={12} md={4}>
@@ -68,7 +79,7 @@ const ProductDetail = () => {
                     <button
                       data-testid='product-detail__buy-button'
                       className={styles['container__row__prod-detail__buy-button']}
-                      type="button"
+                      type='button'
                       onClick={buyClickHandler}
                     >
                       Comprar
