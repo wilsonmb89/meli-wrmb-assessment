@@ -47,9 +47,11 @@ const ProductList = (): JSX.Element => {
         <div
           key={index}
           className={styles['container__item']}
-          onClick={() => onClickItemHandler(item)}
         >
-          <ProductListItem data={item}/>
+          <ProductListItem
+            data={item}
+            onClickItem={() => onClickItemHandler(item)}
+          />
         </div>
       )}
       {noResult && (

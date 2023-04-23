@@ -64,7 +64,9 @@ describe('ProductList component unit tests', () => {
 
     const firstItem = await waitFor(() => screen.findByTestId(`product-list-item-${items[0].id}`));
     expect(firstItem).toBeInTheDocument();
-    userEvent.click(firstItem);
+    const rowItem = await waitFor(() => screen.findByTestId(`row-product-list-item-${items[0].id}`));
+    expect(rowItem).toBeInTheDocument();
+    userEvent.click(rowItem);
     expect(spyNavigate).toHaveBeenCalled();
   });
 

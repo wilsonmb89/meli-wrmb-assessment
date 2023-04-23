@@ -54,7 +54,7 @@ const SearchBar = (): JSX.Element => {
       data-testid='search-bar'
       className={styles['container']}
     >
-      <Container>
+      <Container style={{ maxWidth: '960px' }}>
         <Row
           align='center'
           justify='around'

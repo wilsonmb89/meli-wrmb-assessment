@@ -41,7 +41,7 @@ const ProductDetail = () => {
       className={styles['container']}
     >
       {productSelected && (
-        <Container>
+        <Container style={{ maxWidth: '960px' }}>
           <Row
             align='center'
             justify='around'

@@ -7,6 +7,7 @@ import { ProductListItemState } from '../../store/product-list/product-list.enti
 
 interface ProductListItemProps {
   data: ProductListItemState;
+  onClickItem: () => void;
 }
 
 /**
@@ -14,19 +15,21 @@ interface ProductListItemProps {
  * thus optimizing code generation
  * @param data is the information of a product obtained in the query
  */
-const ProductListItem = ({ data }: ProductListItemProps): JSX.Element => {
+const ProductListItem = ({ data, onClickItem }: ProductListItemProps): JSX.Element => {
   return (
     <section
       data-testid={`product-list-item-${data.id}`}
       className={styles['container']}
     >
-      <Container>
+      <Container style={{ maxWidth: '960px' }}>
         <Row
+          data-testid={`row-product-list-item-${data.id}`}
           align='center'
           justify='around'
           direction='row'
           nogutter
           className={styles['container__row']}
+          onClick={onClickItem}
         >
           <Col xs={6} sm={3}>
             <figure className={styles['container__row__permalink-img-wrapper']}>

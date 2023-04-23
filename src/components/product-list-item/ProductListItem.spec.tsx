@@ -5,12 +5,13 @@ import { justProductListDataState } from '../../test-utils/store-mock';
 import ProductListItem from './ProductListItem';
 
 describe('ProductListItem component unit tests', () => {
-  const { productListState: { items: [mockItemData] } } = justProductListDataState
+  const { productListState: { items: [mockItemData] } } = justProductListDataState;
+  const onClickItemMock = jest.fn();
 
   test('should load the component', async () => {
     act(() => {
       render(
-        <ProductListItem data={mockItemData} />
+        <ProductListItem data={mockItemData} onClickItem={onClickItemMock} />
       );
     });
     const productListItem = await waitFor(() => screen.findByTestId(`product-list-item-${mockItemData.id}`));

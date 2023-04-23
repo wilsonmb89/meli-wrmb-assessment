@@ -36,9 +36,10 @@ describe('Dashboard page unit test', () => {
     const productList = await waitFor(() => screen.findByTestId('product-list'));
     expect(productList).toBeInTheDocument();
     await waitFor(() => screen.findByText(itemTitle));
-    const itemsList = productList.firstChild as HTMLElement;
-    userEvent.click(itemsList);
-    const productDetail = await waitFor(() => screen.getByTestId('product-detail'));
+    const productListItems = await waitFor(() => screen.getAllByTestId('row-product-list-item-', { exact: false }));
+    const firstItem = productListItems[0];
+    userEvent.click(firstItem);
+    const productDetail = await waitFor(() => screen.getByTestId('product-detail', {  }));
     expect(productDetail).toBeInTheDocument();
     const title = await waitFor(() => screen.findByText(itemTitle));
     expect(title).toBeInTheDocument();
